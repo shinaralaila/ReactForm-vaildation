@@ -2,11 +2,16 @@ const express=require('express');
 const app=express();
 const cors=require('cors');
 const mongoose=require ('mongoose')
+const path = require('path');
 
 const Form=require("../backend/models/model.js")
 
 app.use(cors());
 app.use(express.json())
+app.use(express.static(path.join(__dirname, "build")));
+
+// This route serves the React app
+app.get('/', (req, res) => res.sendFile(path.resolve(__dirname, "build", "index.html")));
 
 
 
